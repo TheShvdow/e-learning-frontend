@@ -4,7 +4,8 @@
 
 import { useEffect, useState } from 'react';
 import axios from '@/lib/api';
-import TutorialCard from '@/components/TutorialCard';
+import TutorialCard from '@/components/tutorials/TutorialCard';
+// import CommentList from '@/components/tutorials/CommentList';
 
 export default function TutorialsPage() {
   const [tutorials, setTutorials] = useState([]);

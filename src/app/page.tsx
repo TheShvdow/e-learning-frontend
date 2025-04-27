@@ -1,43 +1,73 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @next/next/no-img-element */
 'use client';
-import  { useEffect, useState } from 'react';
+
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import { useEffect, useState } from 'react';
 import axios from '@/lib/api';
-import CoursCard from '@/components/CoursCard';
+
+interface Cours {
+  id: number;
+  titreCours: string;
+  photo: string;
+  tutorialId: number;
+}
 
 export default function HomePage() {
+  const [popularCourses, setPopularCourses] = useState<Cours[]>([]);
 
-  // fetch all cours
-  const [cours, setCours] = useState([]);
   useEffect(() => {
-    axios.get('/cours')
-      .then(res => setCours(res.data))
-      .catch(() => alert("Erreur lors du chargement des cours."));
+    const fetchPopularCourses = async () => {
+      try {
+        const res = await axios.get('/cours');
+        const courses = res.data.slice(0, 6); // On prend les 6 premiers
+        console.log(courses);
+        setPopularCourses(courses);
+      } catch (error) {
+        console.error('Erreur lors du chargement des cours en vogue', error);
+      }
+    };
+
+    fetchPopularCourses();
   }, []);
 
   return (
-    <div className="text-center mt-20">
-      <h1 className="text-4xl font-bold mb-4">Bienvenue sur la plateforme 🎓</h1>
-      <p className="text-lg text-gray-600 mb-8">
-        Explorez des formations, suivez des tutoriels et obtenez des certificats.
+    <div className="flex flex-col items-center justify-center min-h-screen py-10 px-4">
+      <h1 className="text-4xl font-extrabold tracking-tight mb-4">
+        Bienvenue sur <span className="text-blue-600">Jangu_Bi</span> 🎓
+      </h1>
+      <p className="text-lg text-gray-600 max-w-xl text-center mb-8">
+        Découvrez des formations tech accessibles en français et en wolof. Suivez des tutoriels, progressez et obtenez des certificats.
       </p>
-      <Link
-        href="/formations"
-        className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition"
-      >
-        Découvrir les formations
-      </Link>
-      
-      {/* afficher 6 cours en vogue sur la page d'accueil  */}
-      <h2 className="text-2xl font-bold mt-12 mb-4">Cours en vogue</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {cours.slice(0, 6).map((cours: any) => (
-          <CoursCard key={cours.id} cours={cours} />
-        ))}
-       
-      </div>
 
+      <Button asChild className="mb-10">
+        <Link href="/formations">Découvrir les formations</Link>
+      </Button>
+
+      <div className="w-full max-w-5xl">
+        <h2 className="text-2xl font-bold mb-4">Cours en vogue</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {popularCourses.map((cours) => (
+            <Card key={cours.id} className="hover:shadow-lg transition">
+              <img
+                src={cours.photo}
+                alt={cours.titreCours}
+                className="w-full h-40 object-cover rounded-t"
+              />
+              <CardContent className="p-4">
+                <CardTitle className="text-lg font-semibold">
+                  {cours.titreCours}
+                </CardTitle>
+                <Button asChild variant="outline" className="mt-4 w-full">
+                  <Link href={`/tutorials/${cours.tutorialId}/cours/${cours.id}`}>
+                    Voir le cours
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -7,5 +7,10 @@ export interface IUser {
     avatar?: string;
     role: 'ADMIN' | 'APPRENANT' | 'FORMATEUR';
     bio?: string;
+    demandeRoleFormateur : boolean;
+    motivationFormateur?: string;
+    experienceProfessionnelle?: string;
+    cvUrl?: string;
+    portfolioUrl?:string;
   }
   

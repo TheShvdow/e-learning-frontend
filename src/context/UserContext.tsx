@@ -12,6 +12,12 @@ type User = {
   avatar?: string;
   role: 'ADMIN' | 'FORMATEUR' | 'APPRENANT';
   bio?: string;
+  demandeRoleFormateur: boolean;
+  motivationFormateur?: string;
+  experienceProfessionnelle?: string;
+  cvUrl?: string;
+  portfolioUrl?: string;
+  etatDemande?: string;
 };
 
 type UserContextType = {

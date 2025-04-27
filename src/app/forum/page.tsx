@@ -1,7 +1,7 @@
 
 export default function ForumPage() {
     return (
-        <div>
+        <div >
             <h1>Forum</h1>
         </div>
     );
