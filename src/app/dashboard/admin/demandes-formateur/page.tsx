@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -5,6 +7,7 @@ import axios from '@/lib/api';
 import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner'; // ✅ Assure-toi que 'sonner' est installé
+import AdminSidebar from '@/components/dashboard/AdminSidebar';
 
 interface Demande {
   id: string;
@@ -65,8 +68,13 @@ export default function DemandesFormateurPage() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 flex min-h-screen">
+
+      <AdminSidebar />
+
+      <main className="flex-1 p-6">
       <h1 className="text-2xl font-bold mb-4">Demandes Formateur</h1>
+     
 
       <input
         type="text"
@@ -125,6 +133,7 @@ export default function DemandesFormateurPage() {
           </button>
         ))}
       </div>
+      </main>
     </div>
   );
 }

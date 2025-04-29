@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { useEffect, useState } from 'react';
 import AdminSidebar from '@/components/dashboard/AdminSidebar';
@@ -10,6 +11,7 @@ import Link from 'next/link';
 interface Formation {
   id: number;
   nomFormation: string;
+  photo: string;
   description: string;
 }
 
@@ -98,7 +100,7 @@ export default function AdminDashboardFormations() {
                 </div>
               )}
 
-              <table className="min-w-full bg-white border border-gray-200">
+              <table className="min-w-full bg-white border border-gray-200 text-center">
                 <thead>
                   <tr className="bg-gray-100">
                     <th className="py-2 px-4 border-b">
@@ -108,12 +110,13 @@ export default function AdminDashboardFormations() {
                         onChange={handleSelectAll}
                       />
                     </th>
+                    <th className="py-2 px-4 border-b">Image</th>
                     <th className="py-2 px-4 border-b">Titre</th>
                     <th className="py-2 px-4 border-b">Description</th>
-                    <th className="py-2 px-4 border-b">Actions</th>
+                    <th className="py-2 px-4 border-b ">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody >
                   {formations.map((formation) => (
                     <tr key={formation.id}>
                       <td className="py-2 px-4 border-b">
@@ -123,9 +126,16 @@ export default function AdminDashboardFormations() {
                           onChange={() => handleSelectFormation(formation.id)}
                         />
                       </td>
+                      <td className="py-2 px-4 border-b flex justify-center items-center">
+                        <img
+                          src={formation.photo || '/default-image.png'}
+                          alt={formation.nomFormation}
+                          className="w-16 h-16 object-cover"
+                        />
+                      </td>
                       <td className="py-2 px-4 border-b">{formation.nomFormation}</td>
                       <td className="py-2 px-4 border-b">{formation.description}</td>
-                      <td className="py-2 px-4 border-b flex gap-4">
+                      <td className="py-2 px-4 border-b space-x-4">
                       <Link href={`/dashboard/admin/formations/edit/${formation.id}`}>
                           <button className="text-blue-600 hover:underline">Modifier</button>
                         </Link>

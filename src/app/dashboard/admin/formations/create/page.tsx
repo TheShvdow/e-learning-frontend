@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/dashboard/AdminSidebar';
@@ -11,7 +10,7 @@ export default function AdminCreateFormationPage() {
   const router = useRouter();
   const [nomFormation, setNomFormation] = useState('');
   const [description, setDescription] = useState('');
-  const [photo, setPhoto] = useState('');
+  const [photo, setPhoto] = useState<File | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -19,13 +18,25 @@ export default function AdminCreateFormationPage() {
     e.preventDefault();
     setError('');
     setLoading(true);
-
+  
+    if (!nomFormation || !description || !photo) {
+      setError('Veuillez remplir tous les champs.');
+      setLoading(false);
+      return;
+    }
+  
     try {
-      await axios.post('/formations', {
-        nomFormation,
-        description,
-        photo,
+      const formData = new FormData();
+      formData.append('nomFormation', nomFormation);
+      formData.append('description', description);
+      formData.append('photo', photo);
+  
+      await axios.post('/formations', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+  
       router.push('/dashboard/admin/formations');
     } catch (err) {
       console.error(err);
@@ -34,6 +45,7 @@ export default function AdminCreateFormationPage() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex min-h-screen">
@@ -65,11 +77,12 @@ export default function AdminCreateFormationPage() {
               ></textarea>
             </div>
             <div>
-              <label className="block font-medium">Image (URL)</label>
+              <label className="block font-medium">Image</label>
               <input
-                type="text"
-                value={photo}
-                onChange={(e) => setPhoto(e.target.value)}
+                type="file"
+                accept="image/*"
+                required
+                onChange={(e) => setPhoto(e.target.files ? e.target.files[0] : null)}
                 className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
