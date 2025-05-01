@@ -2,7 +2,6 @@
 import './globals.css';
 import { ThemeModeScript } from 'flowbite-react';
 import { UserProvider } from '@/context/UserContext';
-import ClientLayout from '@/components/UI/ClientLayout';
 import Navbar from '@/components/UI/Navbar';
 import Footer from '@/components/UI/Footer';
 

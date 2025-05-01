@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // 'use client';
 
 // import { useState } from 'react';
@@ -207,7 +208,7 @@ export default function RegisterPage() {
               <Input type="email" name="email" value={form.email} onChange={handleChange} />
             </div>
             <div>
-              <Label>Nom d'utilisateur</Label>
+              <Label>Nom d&apos;utilisateur</Label>
               <Input name="username" value={form.username} onChange={handleChange} />
             </div>
             <div>
