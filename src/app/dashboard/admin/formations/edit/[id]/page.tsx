@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import axios from '@/lib/api';
 import AdminSidebar from '@/components/dashboard/AdminSidebar';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
-import BackButton from '@/components/UI/BackButton';
+import BackButton from '@/components/UIComponents/BackButton';
 
 export default function AdminEditFormationPage() {
   const router = useRouter();

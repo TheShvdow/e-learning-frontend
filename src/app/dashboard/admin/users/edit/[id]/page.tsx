@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
 import axios from '@/lib/api';
 import { IUser } from '@/types/user';
-import BackButton from '@/components/UI/BackButton';
+import BackButton from '@/components/UIComponents/BackButton';
 
 export default function EditUserPage({ params }: { params: { id: string } }) {
   const router = useRouter();

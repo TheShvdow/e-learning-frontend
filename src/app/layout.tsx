@@ -2,8 +2,8 @@
 import './globals.css';
 import { ThemeModeScript } from 'flowbite-react';
 import { UserProvider } from '@/context/UserContext';
-import Navbar from '@/components/UI/Navbar';
-import Footer from '@/components/UI/Footer';
+import Navbar from '@/components/UIComponents/Navbar';
+import Footer from '@/components/UIComponents/Footer';
 
 export const metadata = {
   title: 'E-Learning Platform',

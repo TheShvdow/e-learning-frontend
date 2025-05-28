@@ -6,7 +6,7 @@
   import { useEffect, useState } from 'react';
   import { useRouter } from 'next/navigation';
   import axios from '@/lib/api';
-  import BackButton from '@/components/UI/BackButton';
+  import BackButton from '@/components/UIComponents/BackButton';
   import Link from 'next/link';
   import CommentList from './CommentList';
   interface Cours {

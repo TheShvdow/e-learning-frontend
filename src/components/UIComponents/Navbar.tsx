@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/UserContext';
+import { Button } from '../ui/button';
 
 export default function Navbar() {
   const { user, loading, setUser } = useUser();

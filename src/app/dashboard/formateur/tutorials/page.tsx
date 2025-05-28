@@ -108,6 +108,7 @@ export default function TutorialsPage() {
 
       <div className="grid grid-cols-1 gap-4">
         {tutorials.map((tuto) => (
+          <Link key={tuto.id} href={`/dashboard/formateur/tutorials/${tuto.id}/cours`}>
           <div key={tuto.id} className="p-4 bg-white shadow rounded">
             <h2 className="text-xl font-semibold">{tuto.titreTuto}</h2>
             <p className="text-gray-600 mb-2">{tuto.descriptionTuto}</p>
@@ -126,6 +127,7 @@ export default function TutorialsPage() {
               </button>
             </div>
           </div>
+          </Link>
         ))}
       </div>
 

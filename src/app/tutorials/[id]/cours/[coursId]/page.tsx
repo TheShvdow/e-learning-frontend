@@ -1,3 +1,4 @@
+//src/app/tutorials/[id]/cours/[coursId]/page.tsx
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
@@ -5,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axios from '@/lib/api';
-import BackButton from '@/components/UI/BackButton';
+import BackButton from '@/components/UIComponents/BackButton';
 
 interface Cours {
   id: number;
@@ -61,6 +62,7 @@ export default function CoursDetailPage() {
   return (
     <div className="max-w-4xl mx-auto py-8">
       <BackButton />
+      
       <h1 className="text-3xl font-bold mb-4">{cours.titreCours}</h1>
       <img src={cours.photo} alt={cours.titreCours} className="rounded mb-4" />
       <div className="text-gray-700 whitespace-pre-wrap mb-6">{cours.content}</div>
